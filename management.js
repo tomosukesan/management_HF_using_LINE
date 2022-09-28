@@ -4,13 +4,13 @@ const express = require('express');
 const line = require('@line/bot-sdk');
 const e = require('express');
 const SteinStore = require("stein-js-client");
-const store = new SteinStore("https://api.steinhq.com/v1/storages/6106383b47873c2b73228268");
+const store = new SteinStore(""); //ステインで獲得したAPIのURLを記載
 
 const PORT = process.env.PORT || 3000;
 
 const config = {
-    channelSecret: '1fa8c6b021c1553ac0fbd0bd533dbf7f',
-    channelAccessToken: 'aeVzEjBztXmmcE2kgsb9s2ABQUgBszrVdU/XDDy5edomsHG8V+z9m8d/+Lc0VZ7hI2WxLz6RWy8zR6O7GO4Q4CJ3UBEhZmYDPRp9EjFw/z+B0d2mu0QIXgYm1KEyAajlPntYSe/nlPDo8aATGCsRHQdB04t89/1O/w1cDnyilFU='
+    channelSecret: '',
+    channelAccessToken: ''
 };
 
 const app = express();
@@ -50,7 +50,6 @@ async function handleEvent(event) {
     };
   }
   if (event.message.text === '心不全確認') {
-    //スプレッドシートにuserIdが登録されている場合はその体重を。
     bodyWeight = Number(bodyWeight) + 2;
     message = {
       "type": "template",
@@ -184,11 +183,6 @@ async function handleEvent(event) {
     ]).then(res => { console.log(res); });
     point = 0;
   }
-  //ここで取得した体重をUserIDと紐づける
-  //それぞれどのように取得するのか不明
-  //それぞれのデータは変数console.log();
-  //１度やりとりをするごとにシートに入力されてしまう。
-
   return client.replyMessage(event.replyToken, message);
 }
 
