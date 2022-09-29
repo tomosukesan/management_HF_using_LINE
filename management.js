@@ -4,7 +4,7 @@ const express = require('express');
 const line = require('@line/bot-sdk');
 const e = require('express');
 const SteinStore = require("stein-js-client");
-const store = new SteinStore(""); //ステインで獲得したAPIのURLを記載
+const store = new SteinStore("");
 
 const PORT = process.env.PORT || 3000;
 
@@ -50,6 +50,7 @@ async function handleEvent(event) {
     };
   }
   if (event.message.text === '心不全確認') {
+    //スプレッドシートにuserIdが登録されている場合はその体重を。
     bodyWeight = Number(bodyWeight) + 2;
     message = {
       "type": "template",
